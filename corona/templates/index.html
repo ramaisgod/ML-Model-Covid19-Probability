@@ -1,0 +1,62 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    
+    <title>Corona Infection Probability</title>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 30px;">
+    </nav>
+
+    <center><h2>Corona Infection Probability</h2></center>
+    <center><h5>(Machine Learning Based Model)</h5></center>
+    <hr>
+    {% if infProb %}
+    <center><h4 style="color:blue">Infection Probability is <strong> {{infProb}} % </strong></h4></center>
+    <hr>
+    {% endif %}
+    <div class="container">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+          {% for field in form %}
+          {% if field.name == 'age' or field.name == 'fever' %}
+          <div class="form-group col-md-4">
+            <label for="inputEmail4">{{field.label}}</label>
+            {{field}}
+            <small>{{field.help_text}}</small>
+          </div>          
+          {% else %}          
+          <div class="form-group col-md-4">
+            <label for="inputEmail4">{{field.label}}</label>
+            {{field}}
+            <small>{{field.help_text}}</small>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary">Check</button>
+        <button type="submit" name="btn_reset" class="btn btn-secondary">Reset</button>
+      </form>
+      <br>
+    </div>
+    <div class="alert alert-primary" role="alert">
+      <center>Design & Developed by <strong>Ram Krishna Prasad</strong> <br>
+      <small>Created on 29-March-2020</small>
+    </center> 
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery-3.4.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  </body>
+</html>
